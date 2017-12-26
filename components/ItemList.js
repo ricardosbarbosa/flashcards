@@ -12,6 +12,17 @@ import {
   View,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const allPostsQuery = gql`
+  query {
+    allPosts(orderBy: createdAt_DESC) {
+      id
+      imageUrl
+      description
+    }
+  }`
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
@@ -110,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ItemList;
+export default graphql(allPostsQuery, {name: 'allPostsQuery'})(ItemList)

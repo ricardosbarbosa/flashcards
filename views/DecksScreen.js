@@ -1,6 +1,10 @@
 'use strict';
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withRouter } from 'react-router-native'
+
 import {
   Animated,
   Dimensions,
@@ -15,15 +19,22 @@ import {
 import { ListItem } from 'react-native-elements';
 import ItemList from '../components/ItemList'
 
+import { sayHi } from '../actions'
+
 class DecksScreen extends Component {
 
   static navigationOptions = ({ navigation }) => ({
     title: 'Decks',
     headerRight: <Button title="New Deck" onPress={() => navigation.navigate('NewDeck', {name: 'Lucy'})}/>,
+    headerLeft: <Button title="Ola" onPress={() => navigation.state.params.sayHi("Ave maria")}/>,
   })
 
   componentDidMount () {
-    
+    const {setParams} = this.props.navigation;
+    setParams({
+      sayHi: this.props.sayHi
+    })
+
   }
 
   render() {
@@ -31,7 +42,7 @@ class DecksScreen extends Component {
       <ItemList
         navigation={this.props.navigation}
         items={[
-          {title: 'Item 1', key: '1', questions: [{question: 'What is React?',answer: 'A library for managing user interfaces'}]},
+          {title: `${this.props.oi}`, key: '1', questions: [{question: 'What is React?',answer: 'A library for managing user interfaces'}]},
           {title: 'Item 2', key: '2', questions: []},
           {title: 'Item 3', key: '3', questions: []},
           {title: 'Item 4', key: '4', questions: []},
@@ -63,5 +74,16 @@ class DecksScreen extends Component {
 
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    oi: state.oi,
+  }
+}
 
-export default DecksScreen;
+const mapDispatchToProps = { sayHi }
+
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+)(DecksScreen)
