@@ -8,7 +8,6 @@ import CardsScreen from './CardsScreen';
 import NewCardScreen from './NewCardScreen';
 import QuizScreen from './QuizScreen';
 
-
 const MainNavigator = StackNavigator({
   Decks: { screen: DecksScreen },
   Deck: { screen: DeckScreen },

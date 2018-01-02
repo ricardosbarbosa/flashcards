@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import MainNavigator from './views/MainNavigator';
+import MainNavigator from './src/views/MainNavigator';
 
 // apollo imports
 import ApolloClient from 'apollo-client';
@@ -11,10 +11,9 @@ import { ApolloProvider } from 'react-apollo';
 import { nativeHistory, Route, NativeRouter, } from 'react-router-native'
 import { Provider } from 'react-redux'
 
-import configureStore from './store/configureStore'
+import configureStore from './src/store/configureStore'
 
 const store = configureStore()
-
 
 const client = new ApolloClient({
     link: new HttpLink({ uri: 'https://api.graph.cool/simple/v1/cjbksvgjy0y6w0171i6nujizx' }),

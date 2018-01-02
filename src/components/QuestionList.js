@@ -12,24 +12,13 @@ import {
   View,
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
-
-const allPostsQuery = gql`
-  query {
-    allPosts(orderBy: createdAt_DESC) {
-      id
-      imageUrl
-      description
-    }
-  }`
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const ITEM_HEIGHT = 48;
 const ITEM_AND_SEPARATOR_HEIGHT = ITEM_HEIGHT + (Platform.OS === 'ios') ? Dimensions.hairlineWidth : 0;
 
-class ItemList extends React.PureComponent {
+class QuestionList extends React.PureComponent {
 
   _scrollPos = new Animated.Value(0);
   _scrollSinkY = Animated.event(
@@ -45,25 +34,26 @@ class ItemList extends React.PureComponent {
 
   _onRefresh = () => {
     // Kick off a request to get new data here.
+    this.props.onRefresh()
   };
 
-  _renderItem = ({item}) => {
+  _renderItem = ({question}) => {
     if (Platform.OS === 'ios') {
       return (
         <ListItem
-          key={item.key}
+          key={question.id}
           onPress={() => this._onPressItem(item)}
-          title={item.title}
-          subtitle={`${item.questions.length} Cards`}
+          title={question.question}
+          subtitle={`${question.answer} `}
           underlayColor="#d9d9d9"
         />
       );
     } else {
       return (
-        <TouchableWithoutFeedback onPress={() => this._onPressItem(item)}>
+        <TouchableWithoutFeedback onPress={() => this._onPressItem(question)}>
           <View style={styles.item}>
-            <Text style={styles.itemKey}>{item.key}</Text>
-            <Text style={styles.itemTitle}>{item.title} - {`${item.questions.length} Cards`}</Text>
+            <Text style={styles.itemKey}>{question.key}</Text>
+            <Text style={styles.itemTitle}>{question.title} - {`${question.answer}`}</Text>
           </View>
         </TouchableWithoutFeedback>
       );
@@ -73,7 +63,7 @@ class ItemList extends React.PureComponent {
   render() {
     return (
       <AnimatedFlatList
-        data={this.props.items}
+        data={this.props.questions}
         getItemLayout={(data, index) => ({
           length: ITEM_AND_SEPARATOR_HEIGHT,
           offset: ITEM_AND_SEPARATOR_HEIGHT * index,
@@ -121,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default graphql(allPostsQuery, {name: 'allPostsQuery'})(ItemList)
+export default QuestionList
