@@ -52,7 +52,7 @@ class DeckList extends React.PureComponent {
       );
     } else {
       return (
-        <TouchableWithoutFeedback onPress={() => this._onPressItem(item)}>
+        <TouchableWithoutFeedback key={item.id} onPress={() => this._onPressItem(item)}>
           <View style={styles.item}>
             <Text style={styles.itemKey}>{item.id}</Text>
             <Text style={styles.itemTitle}>{item.title} - {`${item._questionsMeta.count} Cards`}</Text>

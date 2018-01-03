@@ -15,7 +15,7 @@ export const allDecksQuery = gql`
 
 
 export const deckByIdQuery = gql`
-  query deckByIdQuery($id: String!){
+  query deckByIdQuery($id: ID!){
     
     allDecks(filter: {id: $id}) {
       id

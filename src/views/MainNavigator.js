@@ -7,6 +7,7 @@ import NewDeckScreen from './NewDeckScreen';
 import CardsScreen from './CardsScreen';
 import NewCardScreen from './NewCardScreen';
 import QuizScreen from './QuizScreen';
+import QuizResultScreen from './QuizResultScreen'
 
 const MainNavigator = StackNavigator({
   Decks: { screen: DecksScreen },
@@ -15,6 +16,7 @@ const MainNavigator = StackNavigator({
   Cards: { screen: CardsScreen },
   NewCard: { screen: NewCardScreen },
   Quiz: { screen: QuizScreen },
+  QuizResult: {screen: QuizResultScreen}
 });
 
 export default MainNavigator;

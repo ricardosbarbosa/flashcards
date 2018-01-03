@@ -26,6 +26,7 @@ export const FINISH_QUIZ = "FINISH_QUIZ"
 export const NEXT_QUESTION = "NEXT_QUESTION"
 export const PREVIOUS_QUESTION = "PREVIOUS_QUESTION"
 export const LOAD_DECKS = "LOAD_DECKS"
+export const LOAD_DECK = "LOAD_DECK"
 export const SAVE_DECK  = "SAVE_DECK "
 export const DELETE_DECK = "DELETE_DECK"
 export const UPDATE_DECK = "UPDATE_DECK"
@@ -75,12 +76,17 @@ export function loadDecks() {
 }
 
 export function deckById(id) {
+  console.log("deck by id")
+  console.log(id)
  return dispatch => {
     client.query({
-      query: deckByIdQuery
+      query: deckByIdQuery,
+      variables: { id }
     })
     .then(response => {
-      dispatch({ type: LOAD_DECKS, decks: response.data.allDecks})
+      console.log("deu certo")
+      console.log(response)
+      dispatch({ type: LOAD_DECK, deck: response.data.allDecks && response.data.allDecks[0]})
     })
     .catch(response => {
       console.log("eroooo")

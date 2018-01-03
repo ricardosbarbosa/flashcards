@@ -18,7 +18,14 @@ const user = (state = null, action) => {
 
 
 const deck = (state = null, action) => {
+  
   switch(action.type) {
+    case ActionTypes.LOAD_DECK: //id
+      console.log(action)
+      if (!action.deck) {
+        return null
+      }
+     return action.deck
     case ActionTypes.EDIT_DECK: //id
      return action.deck
     case ActionTypes.NEW_DECK: //id

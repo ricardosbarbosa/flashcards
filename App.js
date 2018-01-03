@@ -13,6 +13,8 @@ import { Provider } from 'react-redux'
 
 import configureStore from './src/store/configureStore'
 
+import { setLocalNotification } from './src/utils/helpers'
+
 const store = configureStore()
 
 const client = new ApolloClient({
@@ -22,6 +24,9 @@ const client = new ApolloClient({
 
 
 export default class App extends React.Component {
+  componentDidMount() {
+     setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>

@@ -14,7 +14,8 @@ import {
   Text,
   TouchableWithoutFeedback,
   View,
-  Button
+  Button,
+  StatusBar
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import DeckList from '../components/DeckList'
@@ -43,18 +44,17 @@ class DecksScreen extends Component {
     })
 
     this.props.loadDecks()
-
   } 
 
   render() {
     const { decks , loadDecks} = this.props
     // console.log(decks)
     return (
-      <DeckList
-        onRefresh={loadDecks}
-        navigation={this.props.navigation}
-        decks={decks}
-      />
+        <DeckList
+          onRefresh={loadDecks}
+          navigation={this.props.navigation}
+          decks={decks}
+        />
     )
   } 
 
